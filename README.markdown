@@ -9,5 +9,6 @@ Clear2Pay Payment Gateway Extension
   2. Language (default is EN)
   3. CPID (provided to you by Clear Park)
   4. Currency Code ("EUR" for example)
+	5. Security Token (used for optional verification scripts)
 - For more information or to sign up for an account, visit www.clearpark.net
 
