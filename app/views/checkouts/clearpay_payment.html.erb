@@ -1,0 +1,27 @@
+<fieldset id='payment' style="width:70%;">
+<% payment_method = @gateway %>
+<% form_tag @gateway.preferred_url do -%>
+<h2><%= t('clearpay_payment') %></h2>
+<p><%= t('clearpay_instuctional_text') %></p>
+	<%= hidden_field_tag 'CPID', payment_method.preferred_cpid %>
+	<%= hidden_field_tag 'ORDID', @order.number %>
+	<%= hidden_field_tag 'CURCODE', payment_method.preferred_currency_code %>
+	<%= hidden_field_tag 'TIA', @order.total.to_s.gsub(".", ",") %>
+	<%= hidden_field_tag 'URLOK', url_for(payment_success_order_checkout_url(@order, :payment_method_id => payment_method)) %>
+	<%= hidden_field_tag 'URLNOK', url_for(payment_failure_order_checkout_url(@order, :payment_method_id => payment_method)) %>
+	<%= hidden_field_tag 'FIRSTNAME', @order.bill_address.firstname %>
+	<%= hidden_field_tag 'LASTNAME', @order.bill_address.lastname %>
+	<%= hidden_field_tag 'STREET', @order.bill_address.address1 %>
+	<%= hidden_field_tag 'CITY', @order.bill_address.city %>
+	<%= hidden_field_tag 'ZIPCODE', @order.bill_address.zipcode %>
+	<%= hidden_field_tag 'COUNTRY', @order.bill_address.country.name %>
+	<%= hidden_field_tag 'DESC', 'Spree Order' %>
+	<%= hidden_field_tag 'LANG', payment_method.preferred_language %>
+	<%= hidden_field_tag 'PAYMENTSELECTION', 'CreditCard' %>
+
+	<%= submit_tag t('clearpay_submit') %>
+<% end %>
+
+
+
+</fieldset>

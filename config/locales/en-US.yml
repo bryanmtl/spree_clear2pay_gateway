@@ -1,0 +1,18 @@
+---
+en-US:
+  clearpay_payment: Pay by credit card
+  clear_pay_instructions: "Pay now using Clear2Pay (you'll no be redirected to Clear Pay's secure server)"
+  clearpay_instuctional_text: "Click the payment button below to have your credit card processed by our secure servers. We accept visa, mastercard...."
+  url: URL
+  redirect_success: Success Redirect URL
+  redirect_fail: Failure Redirect URL
+  cpid: CPID
+  security_token: Security Token
+  language: Language
+  checkout_steps:
+    clearpay: Payment
+  clearpay_submit: "Pay with ClearPay"
+  pay_now: "Pay Now"
+  clearpay_payment_failure: "Yikes! Something went wrong. Please try again."
+  clearpay_payment_success: "Yes! Your payment has been accepted."
+  
