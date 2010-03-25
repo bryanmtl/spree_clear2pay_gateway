@@ -1,10 +1,10 @@
 # Uncomment this if you reference any of your controllers in activate
 # require_dependency 'application'
 
-class Clear2payGatewayExtension < Spree::Extension
+class SpreeClear2payGatewayExtension < Spree::Extension
   version "1.0"
   description "Integration with Clear2Pay gateway. Added as a payment method"
-  url "http://github.com/bryanmtl/clear2pay_gateway"
+  url "http://github.com/bryanmtl/spree_clear2pay_gateway"
 
   def activate
     
