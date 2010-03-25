@@ -30,7 +30,7 @@ module Spree::ClearPay
     # query - need 0 in amount for an auth? see main code
     transaction = CreditcardTxn.new( :amount => @order.total,
                                      :response_code => 'success',
-                                     :payment_status => 'paid',
+                                     # :payment_status => 'paid',
                                      :txn_type => CreditcardTxn::TxnType::PURCHASE)
     
 
