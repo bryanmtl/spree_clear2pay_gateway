@@ -10,4 +10,8 @@ class PaymentMethod::ClearPay < PaymentMethod
   # Validation Code: 123
   # Any future date
   
+  def payment_profiles_supported?
+    false
+  end
+  
 end
