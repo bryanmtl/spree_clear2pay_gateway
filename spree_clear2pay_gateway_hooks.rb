@@ -1,4 +1,4 @@
-class Clear2payGatewayHooks < Spree::ThemeSupport::HookListener
+class SpreeClear2payGatewayHooks < Spree::ThemeSupport::HookListener
 
   #
   # In this file you can modify the content of the hooks available in the default templates
