@@ -2,6 +2,13 @@
 <% payment_method = @gateway %>
 <% form_tag @gateway.preferred_url do -%>
 <h2><%= t('clearpay_payment') %></h2>
+<fieldset id="order_details">
+  <div class="clear"></div>
+  <legend><%= t("confirm") %></legend>
+  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+</fieldset>
+
+<hr />
 <p><%= t('clearpay_instuctional_text') %></p>
 	<%= hidden_field_tag 'CPID', payment_method.preferred_cpid %>
 	<%= hidden_field_tag 'ORDID', @order.number %>
