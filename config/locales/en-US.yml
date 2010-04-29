@@ -11,7 +11,7 @@ en-US:
   language: Language
   checkout_steps:
     clearpay: Payment
-  clearpay_submit: "Pay with ClearPay"
+  clearpay_submit: "Pay and place order"
   pay_now: "Pay Now"
   clearpay_payment_failure: "Yikes! Something went wrong. Please try again."
   clearpay_payment_success: "Yes! Your payment has been accepted."
