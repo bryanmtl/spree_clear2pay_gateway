@@ -18,7 +18,7 @@ class Clear2payGatewayExtension < Spree::Extension
 
         def redirect_for_clearpay
           if object.payment? 
-            if PaymentMethod.find(params[:checkout][:payments_attributes].first[:payment_method_id].to_i).name == 'Clear2Pay'
+            if PaymentMethod.find(params[:checkout][:payments_attributes].first[:payment_method_id].to_i).class.name == 'PaymentMethod::ClearPay'
               payment_method = params[:checkout][:payments_attributes].first[:payment_method_id].to_i
               redirect_to(clearpay_payment_order_checkout_url(:payment_method_id => payment_method)) and return
             end
