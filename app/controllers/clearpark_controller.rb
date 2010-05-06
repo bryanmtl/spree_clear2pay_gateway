@@ -12,8 +12,12 @@ class ClearparkController < ApplicationController
     end 
   end
   
-  def get_extra_info
-    # not really necessary
+  def getextrainfo
+     unless @cpid == params[:CPID] and @order and params[:INF] == 'CustomerReference'
+        render :text => 'NOK'
+      else
+        render :text => 'OK'
+      end
   end
   
   def notification
