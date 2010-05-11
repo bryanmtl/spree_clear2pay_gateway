@@ -1,5 +1,5 @@
 ---
-en-US:
+en:
   clearpay_payment: Pay by credit card
   clear_pay_instructions: "Pay now using Clear2Pay (you'll no be redirected to Clear Pay's secure server)"
   clearpay_instuctional_text: "Click the payment button below to have your credit card processed by our secure servers. We accept visa, mastercard...."
