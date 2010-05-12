@@ -27,49 +27,50 @@ class ClearparkController < ApplicationController
     ok_result_values = %w(Approved Rejected Exception)
     unless @cpid == params[:CPID] and @security_token == params[:SECTOK] and @order.total.to_s == total and ok_result_values.include?(result)
       render :text => 'NOK'
-    elsif result != 'Approved'
-      render :text => 'NOK'
     else
-      begin
-      # record the payment
-      fake_card = Creditcard.new :cc_type        => "visa",
-                                 :month          => Time.now.month, 
-                                 :year           => Time.now.year, 
-                                 :first_name     => @order.bill_address.firstname, 
-                                 :last_name      => @order.bill_address.lastname,
-                                 :verification_value => 'clearpay',
-                                 :number => "clearpay"
+      if result == 'Approved'
+        begin
+        # record the payment
+        fake_card = Creditcard.new :cc_type        => "visa",
+                                   :month          => Time.now.month, 
+                                   :year           => Time.now.year, 
+                                   :first_name     => @order.bill_address.firstname, 
+                                   :last_name      => @order.bill_address.lastname,
+                                   :verification_value => 'clearpay',
+                                   :number => "clearpay"
 
-      payment = @order.checkout.payments.create(:amount => @order.total, 
-                                             :source => fake_card,
-                                             :payment_method_id => @gateway.id)
+        payment = @order.checkout.payments.create(:amount => @order.total, 
+                                               :source => fake_card,
+                                               :payment_method_id => @gateway.id)
 
-      # query - need 0 in amount for an auth? see main code
-      transaction = CreditcardTxn.new( :amount => @order.total,
-                                       :response_code => 'success',
-                                       # :payment_status => 'paid',
-                                       :txn_type => CreditcardTxn::TxnType::PURCHASE)
+        # query - need 0 in amount for an auth? see main code
+        transaction = CreditcardTxn.new( :amount => @order.total,
+                                         :response_code => 'success',
+                                         # :payment_status => 'paid',
+                                         :txn_type => CreditcardTxn::TxnType::PURCHASE)
 
 
-      payment.txns << transaction  
+        payment.txns << transaction  
 
-      @order.save!
-      session[:order_id] = nil
-      until @order.checkout.state == "complete"
-        @order.checkout.next!
-      end
-      flash[:commerce_tracking] = I18n.t("notice_messages.track_me_in_GA")
-      payment.finalize!
+        @order.save!
+        session[:order_id] = nil
+        until @order.checkout.state == "complete"
+          @order.checkout.next!
+        end
+        flash[:commerce_tracking] = I18n.t("notice_messages.track_me_in_GA")
+        payment.finalize!
       
-    rescue
+      rescue
+        render :text => 'NOK'
+        return false
+      end
+    else
+      # the transaction didn't go through, respond with a fail
       render :text => 'NOK'
       return false
     end
-      
       # respond ok
-      render :text => 'OK'
-      
-      
+      render :text => 'OK'   
     end
   end
   
