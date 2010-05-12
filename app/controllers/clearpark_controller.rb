@@ -26,6 +26,8 @@ class ClearparkController < ApplicationController
     ok_result_values = %w(Approved Rejected Exception)
     unless @cpid == params[:CPID] and @security_token == params[:SECTOK] and @order.total.to_s == total and ok_result_values.include?(result)
       render :text => 'NOK'
+    elsif result != 'Approved'
+      render :text => 'NOK'
     else
       begin
       # record the payment
