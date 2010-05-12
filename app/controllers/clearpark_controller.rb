@@ -65,8 +65,8 @@ class ClearparkController < ApplicationController
         return false
       end
     else
-      # the transaction didn't go through, respond with a fail
-      render :text => 'NOK'
+      # the transaction didn't go through yet, but we still need to respond with ok
+      render :text => 'OK'
       return false
     end
       # respond ok
