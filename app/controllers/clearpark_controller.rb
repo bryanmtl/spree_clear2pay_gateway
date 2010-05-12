@@ -1,6 +1,7 @@
 class ClearparkController < ApplicationController
   
   before_filter :set_gateway_and_order
+  skip_before_filter :verify_authenticity_token 
   
   def verification
     total = params[:TIA].to_s.gsub(",", ".")
