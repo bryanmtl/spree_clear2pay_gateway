@@ -7,26 +7,26 @@ class ClearparkController < ApplicationController
     total = params[:TIA].to_s.gsub(",", ".")
     # make sure the cpid matches before going any further
     unless @cpid == params[:CPID] and  @security_token == params[:SECTOK] and @order.total.to_s == total 
-      render :text => 'NOK'
+      render :text => '[NOK]'
     else
-      render :text => 'OK'
+      render :text => '[OK]'
     end 
   end
   
   def getextrainfo
      unless @cpid == params[:CPID] and @order and params[:INF] == 'CustomerReference'
-        render :text => 'NOK'
+        render :text => '[NOK]'
       else
-        render :text => 'OK'
+        render :text => '[OK]'
       end
   end
   
   def notification
-    total = params[:TIA].to_s.gsub(",", ".")
+    total = params[:TIA].to_s.gsub(",", ".").to_f
     result = params[:RESULT]
     ok_result_values = %w(Approved Rejected Exception)
-    unless @cpid == params[:CPID] and @security_token == params[:SECTOK] and @order.total.to_s == total and ok_result_values.include?(result)
-      render :text => 'NOK'
+    unless @cpid == params[:CPID] and @security_token == params[:SECTOK] and @order.total.to_f == total and ok_result_values.include?(result)
+      render :text => '[NOK]'
     else
       if result == 'Approved'
         begin
@@ -61,16 +61,16 @@ class ClearparkController < ApplicationController
         payment.finalize!
       
       rescue
-        render :text => 'NOK'
+        render :text => '[NOK]'
         return false
       end
     else
       # the transaction didn't go through yet, but we still need to respond with ok
-      render :text => 'OK'
+      render :text => '[OK]'
       return false
     end
       # respond ok
-      render :text => 'OK'   
+      render :text => '[OK]'   
     end
   end
   
