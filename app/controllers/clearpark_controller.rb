@@ -4,9 +4,9 @@ class ClearparkController < ApplicationController
   skip_before_filter :verify_authenticity_token 
   
   def verification
-    total = params[:TIA].to_s.gsub(",", ".")
+    total = params[:TIA].to_s.gsub(",", ".").to_f
     # make sure the cpid matches before going any further
-    unless @cpid == params[:CPID] and  @security_token == params[:SECTOK] and @order.total.to_s == total 
+    unless @cpid == params[:CPID] and  @security_token == params[:SECTOK] and @order.total.to_f == total 
       render :text => '[NOK]'
     else
       render :text => '[OK]'
