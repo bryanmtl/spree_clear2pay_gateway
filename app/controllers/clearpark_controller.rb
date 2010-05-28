@@ -53,11 +53,9 @@ class ClearparkController < ApplicationController
         payment.txns << transaction  
 
         @order.save!
-        session[:order_id] = nil
         until @order.checkout.state == "complete"
           @order.checkout.next!
         end
-        flash[:commerce_tracking] = I18n.t("notice_messages.track_me_in_GA")
         payment.finalize!
       
       rescue
