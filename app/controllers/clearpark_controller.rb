@@ -26,6 +26,8 @@ class ClearparkController < ApplicationController
   end
   
   def notification
+    render :text => '[NOK]' and return unless @order
+    
     total = params[:TIA].to_s.gsub(",", ".").to_f
     result = params[:RESULT]
     ok_result_values = %w(Approved Rejected Exception)
