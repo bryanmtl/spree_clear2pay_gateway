@@ -23,7 +23,7 @@
 	<%= hidden_field_tag 'ZIPCODE', @order.bill_address.zipcode %>
 	<%= hidden_field_tag 'COUNTRY', @order.bill_address.country.name %>
 	<%= hidden_field_tag 'DESC', 'Spree Order' %>
-	<%= hidden_field_tag 'LANG', payment_method.preferred_language.blank? ? I18n.locale.slice(0..1).upcase : payment_method.preferred_language %>
+	<%= hidden_field_tag 'LANG', payment_method.preferred_language.blank? ? I18n.locale.to_s.slice(0..1).upcase : payment_method.preferred_language %>
 	<%= hidden_field_tag 'PAYMENTSELECTION', 'CreditCard' %>
 
 	<%= submit_tag t('clearpay_submit') %>
