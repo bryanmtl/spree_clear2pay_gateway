@@ -26,7 +26,7 @@ class Clear2payGatewayExtension < Spree::Extension
         end
         
         def payment_success
-          @order = Order.find_by_number(params[:id])
+          @order = Order.find_by_number(params[:order_id])
           session[:order_id] = nil
           flash[:commerce_tracking] = I18n.t("notice_messages.track_me_in_GA")
         end
