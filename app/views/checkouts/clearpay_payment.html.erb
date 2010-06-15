@@ -14,7 +14,7 @@
 	<%= hidden_field_tag 'ORDID', @order.number %>
 	<%= hidden_field_tag 'CURCODE', payment_method.preferred_currency_code %>
 	<%= hidden_field_tag 'TIA', @order.total.to_s.gsub(".", ",") %>
-	<%= hidden_field_tag 'URLOK', url_for(payment_success_order_checkout_url(@order, :payment_method_id => payment_method)) %>
+	<%= hidden_field_tag 'URLOK', order_url(@order, {:checkout_complete => true, :order_token => @order.token}) %>
 	<%= hidden_field_tag 'URLNOK', url_for(payment_failure_order_checkout_url(@order, :payment_method_id => payment_method)) %>
 	<%= hidden_field_tag 'FIRSTNAME', @order.bill_address.firstname %>
 	<%= hidden_field_tag 'LASTNAME', @order.bill_address.lastname %>
